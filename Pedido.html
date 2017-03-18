@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE> ORDERS</TITLE>
+<link rel="StyleSheet" type="text/css" href="pattern.css">
+
+
+</HEAD>
+
+<BODY background="gris.jpg">
+ <div class="header">
+        <img align="left" src="Logo ERP Tecnun.png">
+        <h1 align="center">ERP TECNUN</h1>
+    </div>
+    <ul class="navbar">
+        <li class="dropdown">
+            <a class="dropbtn"><font face="Arial">Menu</font></a>
+            <div class="dropdown-content">
+                <a class="active" href="Pedido.html">Orders</a>
+                <a href="customers.html">Customers</a>
+                <a href="producttxt.html">Products</a>
+                <a href="accounting.html">Accounting</a>
+                <a href="bills.html">Bills</a>
+            </div> 
+        </li>
+    </ul>
+
+<h2 align="center"><font size="8" color="#088A85" face="Calibri"><b>NEW ORDER</b></font></h2>
+<form method="get" action="IntroducirPedido" name="pedidos">
+
+    <table cellspacing="1" cellpadding="1" border="0" align="center" width="80%" summary="">
+        <tbody>
+            <tr>
+                <td align="center"><font size="5" color="#04B4AE" face="Calibri"> Customer </font></td>
+                <td align="left"><input type="text" name="customer" size="30" /></td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5" color="#04B4AE" face="Calibri"> Product </font></td>
+                <td align="left"><input type="text" name="product" size="20" /></td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5" color="#04B4AE" face="Calibri"> Price </font></td>
+                <td align="left"><input type="text" name="price" size="20" /></td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5" color="#04B4AE" face="Calibri"> Date </font></td>
+                <td align="left"><input type="date" name="date" size="20" /></td>
+            </tr>
+            <tr>
+            <td align="center" colspan="2"><button TYPE="submit"  value="Add">ADD NEW ORDER </button></td>
+            </tr>
+        </tbody>
+        
+           
+            
+    </table>
+</form>
+
+   <form action="MostrarCustomer" name="enseñar"><button style="position:absolute; top:500px; left:600px;" type="submit" value="add"> SEE ACTUAL ORDERS</button></form>
+        
+   <a href="update.html"><button style="position:absolute; top:500px; left:760px;" type="button">MODIFY ORDERS</button></a>
+        
+        
+  
+
+</BODY>
+</HTML>

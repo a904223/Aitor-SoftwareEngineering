@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<title>Introduce Workers</title>
+    <link rel="StyleSheet" type="text/css" href="pattern.css">
+    <script type='text/javascript'>
+        function addFields(){
+            var number = document.getElementById("employee").value;
+            var container = document.getElementById("container");
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            for (i=0;i<number;i++){
+                container.appendChild(document.createTextNode("Employee " + (i+1)));
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "name" + (i+1);
+                container.appendChild(input);
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+</head>
+
+<body bgcolor="#FFFFFF" text="#631818">
+
+    <div class="header">
+        <img align="left" src="Logo ERP Tecnun.png">
+        <h1 align="center">INTRODUCE A DATE</h1>
+    </div>
+    <ul class="navbar">
+        <li class="dropdown">
+            <a class="dropbtn"><font face="Arial">Menu</font></a>
+            <div class="dropdown-content">
+                <a class="active" href="Pedido.html">Orders</a>
+                <a href="customers.html">Customers</a>
+                <a href="producttxt.html">Products</a>
+                <a href="accounting.html">Accounting</a>
+                <a href="bills.html">Bills</a>
+            </div>
+        </li>
+    </ul>
+
+    <form method="GET" action="Trabajadores">
+        <BR>
+        <p align="center">
+        <TABLE BORDER="0">                
+            <TR>
+                <TD><font size="3">Year</font></TD>
+                <TD><input type="date" name="date" id="year"></TD>
+            </TR>
+        </TABLE>
+        <p align="center">
+        <input type="submit" value="Submit">&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="Delete"></p>
+        </p>
+
+    </form>
+    <p align="center">&nbsp;</p>
+
+
+
+</body>
+
+</html>

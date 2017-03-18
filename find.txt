@@ -1,0 +1,3 @@
+Aqui metere un buscador mediante ajax para la entrega final. 
+Funcionara de manera que cuando rellenemos el campo customer automaticamente rellene los otros campos.
+Ahora, con poner el campo Customer igual ya podemos modificar todo lo demas. 
