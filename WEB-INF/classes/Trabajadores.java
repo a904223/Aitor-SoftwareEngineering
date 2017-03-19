@@ -12,7 +12,7 @@ public class Trabajadores extends HttpServlet{
         super.init(config);
         try {
             Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            String url="jdbc:odbc:Database";
+            String url="jdbc:odbc:erp";
             connection=DriverManager.getConnection(url);
         } catch(Exception e) {
             e.printStackTrace();
@@ -195,7 +195,7 @@ public class Trabajadores extends HttpServlet{
             out.println("<script> $( function() { $( \"#draggable\" ).draggable({ revert: \"valid\" }); $( \'#droppable td\' ).droppable({ drop: function ( event, ui ) { var parenttd = $(this).attr(\'id\'); alert(\"parenttd=\" + parenttd); $( this ) .find( \"p\" ) .html( \"Day Off!\" ); } }) }); </script>");
             out.println("</head>");
             out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
-            out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><div id=\"draggable\" class=\"ui-widget-content\"> <p>Day Off</p> </div> <br /><br />");
+            out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"orders.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><div id=\"draggable\" class=\"ui-widget-content\"> <p>Day Off</p> </div> <br /><br />");
             out.println("<p align=\"center\"><font size=\"6\"><b>WORKING TIMETABLE</b></font></p>");
             out.println("<input type=\"hidden\" name=\"day\" value=\"" + Day + "\">");
             out.println("<input type=\"hidden\" name=\"month\" value=\"" + Month + "\">");
