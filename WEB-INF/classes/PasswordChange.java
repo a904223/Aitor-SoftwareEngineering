@@ -7,7 +7,6 @@ import javax.servlet.http.*;
 public class PasswordChange extends HttpServlet{
     
     Connection connection;
-    private static int h = 0;
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
@@ -29,11 +28,12 @@ public class PasswordChange extends HttpServlet{
             System.out.println("Error opening PrintWriter");
         }
         
-        String usuario = request.getParameter("usuario");
+        String usuario = "D.Zumeta" ;
+        //request.getParameter("usuario");
         String pass_actual = request.getParameter("pass_actual");
-        System.out.println("pass_actual: " +pass_actual);
-        String pass_nueva1 = request.getParameter("pass_nueva1");
-        String pass_nueva2 = request.getParameter("pass_nueva2");
+        System.out.println("usuario: " + usuario + ", pass_actual: " + pass_actual);
+        // String pass_nueva1 = request.getParameter("pass_nueva1");
+        // String pass_nueva2 = request.getParameter("pass_nueva2");
         
         // if(usuario==null) {
             // System.out.println("Problem reading username from request");
@@ -53,16 +53,26 @@ public class PasswordChange extends HttpServlet{
         // }
         
                 
-        String sql_user = "SELECT Usuario FROM Employees WHERE Usuario='" + usuario + "'"; 
-        String sql_insert = "UPDATE Employees SET Contrasena = '" + pass_nueva1 + "' WHERE Usuario='" + usuario + "'";
-        System.out.println(sql_user);
+        String sql_contra = "SELECT Contrasena FROM Employees WHERE Usuario='" + usuario + "'"; 
+        // String sql_insert = "UPDATE Employees SET Contrasena = '" + pass_nueva1 + "' WHERE Usuario='" + usuario + "'";
+        System.out.println(sql_contra);
         
         try{
             Statement statement=connection.createStatement();
             Statement statement2=connection.createStatement();
-            statement2.executeUpdate(sql_insert);
-            statement2.close();
-            ResultSet result = statement.executeQuery(sql_user);
+            // statement2.executeUpdate(sql_insert);
+            // statement2.close();
+            ResultSet result = statement.executeQuery(sql_contra);
+            result.next();
+            String SqlContrasena = result.getString("Contrasena");
+            System.out.println("SqlContrasena: " +SqlContrasena);
+            System.out.println("pass_actual: " +pass_actual);
+            
+            if (SqlContrasena==pass_actual){
+                System.out.println("Siiiiiiiiiiiiiiiiiiiiiii");
+            } else if (SqlContrasena!=pass_actual){
+                System.out.println("Nooooooooooooooooooooooo");
+            }
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Password Change</title>");
@@ -92,7 +102,7 @@ public class PasswordChange extends HttpServlet{
             // }
         } catch(SQLException e) {
             e.printStackTrace();
-            System.out.println("Resulset: " + sql_user + " Exception: " + e);
+            System.out.println("Resulset: " + sql_contra + " Exception: " + e);
         }
         out.close();
     }
