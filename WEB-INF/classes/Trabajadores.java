@@ -12,7 +12,7 @@ public class Trabajadores extends HttpServlet{
         super.init(config);
         try {
             Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            String url="jdbc:odbc:erp";
+            String url="jdbc:odbc:Database";
             connection=DriverManager.getConnection(url);
         } catch(Exception e) {
             e.printStackTrace();
