@@ -28,62 +28,81 @@ public class PasswordChange extends HttpServlet{
             System.out.println("Error opening PrintWriter");
         }
         
-        String usuario = "D.Zumeta" ;
-        //request.getParameter("usuario");
+        String usuario = request.getParameter("usuario");
         String pass_actual = request.getParameter("pass_actual");
         System.out.println("usuario: " + usuario + ", pass_actual: " + pass_actual);
-        // String pass_nueva1 = request.getParameter("pass_nueva1");
-        // String pass_nueva2 = request.getParameter("pass_nueva2");
+        String pass_nueva1 = request.getParameter("pass_nueva1");
+        String pass_nueva2 = request.getParameter("pass_nueva2");
         
-        // if(usuario==null) {
-            // System.out.println("Problem reading username from request");
-            // return;
-        // }
+        if(usuario==null) {
+            System.out.println("Problem reading username from request");
+            return;
+        }
         if(pass_actual==null) {
           System.out.println("Problem reading the actual password from request");
           return;
         }
-        // if(pass_nueva1==null) {
-          // System.out.println("Problem reading the new password from request");
-          // return;
-        // }
-        // if(pass_nueva2==null) {
-          // System.out.println("Problem reading the new password from request");
-          // return;
-        // }
+        if(pass_nueva1==null) {
+          System.out.println("Problem reading the new password from request");
+          return;
+        }
+        if(pass_nueva2==null) {
+          System.out.println("Problem reading the new password from request");
+          return;
+        }
         
                 
         String sql_contra = "SELECT Contrasena FROM Employees WHERE Usuario='" + usuario + "'"; 
-        // String sql_insert = "UPDATE Employees SET Contrasena = '" + pass_nueva1 + "' WHERE Usuario='" + usuario + "'";
+        String sql_insert = "UPDATE Employees SET Contrasena = '" + pass_nueva1 + "' WHERE Usuario='" + usuario + "'";
         System.out.println(sql_contra);
         
         try{
             Statement statement=connection.createStatement();
             Statement statement2=connection.createStatement();
-            // statement2.executeUpdate(sql_insert);
-            // statement2.close();
+            
             ResultSet result = statement.executeQuery(sql_contra);
             result.next();
             String SqlContrasena = result.getString("Contrasena");
-            System.out.println("SqlContrasena: " +SqlContrasena);
-            System.out.println("pass_actual: " +pass_actual);
+            System.out.println("SqlContrasena:/" +SqlContrasena+ "/");
+            System.out.println("Clase de SqlContrasena:" +SqlContrasena.getClass().getName());
+            System.out.println("pass_actual:/" +pass_actual+ "/");
+            System.out.println("Clase de pass_actual:" +pass_actual.getClass().getName());
             
-            if (SqlContrasena==pass_actual){
+            if (SqlContrasena.equals(pass_actual)){
                 System.out.println("Siiiiiiiiiiiiiiiiiiiiiii");
+                statement2.executeUpdate(sql_insert);
+                statement2.close();
+                
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Password Change</title>");
+                out.println("<link rel=StyleSheet type=text/css href=pattern.css>");
+                out.println("</head>");
+                out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
+                out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">PASSWORD CHANGE</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul>");
+                out.println("<p align=\"center\"><font size=\"6\"><b>PASSWORD CHANGE WAS SUCCESSFULLY ACHIEVED</b></font></p>");
+                out.println("<p>Old password: " + pass_actual + "</p>");
+                out.println("<p>New password: " + pass_nueva1 + "</p>");
+                out.println("</body>");
+                out.println("</html>");
+                
             } else if (SqlContrasena!=pass_actual){
                 System.out.println("Nooooooooooooooooooooooo");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Password Change</title>");
+                out.println("<link rel=StyleSheet type=text/css href=pattern.css>");
+                out.println("</head>");
+                out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
+                out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">PASSWORD CHANGE</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul>");
+                out.println("<p align=\"center\"><font size=\"6\"><b>THERE WAS A MISTAKE</b></font></p>");
+                out.println("<p align=\"center\"><font size=\"4\"><b>Wrong password. Try again</b></font></p>");
+                out.println("<input type=\"button\" class=\"boton grisn\" value=\"Go back\ href=\"PasswordChange.html\">");
+                out.println("</body>");
+                out.println("</html>");
             }
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Password Change</title>");
-            out.println("<link rel=StyleSheet type=text/css href=pattern.css>");
-            out.println("</head>");
-            out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
-            out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">PASSWORD CHANGE</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul>");
-            out.println("<p align=\"center\"><font size=\"6\"><b>PASSWORD CHANGE</b></font></p>");
-            out.println("<p align=\"center\">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            
             out.flush();
             out.close();
             
