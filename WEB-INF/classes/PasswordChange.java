@@ -97,14 +97,12 @@ public class PasswordChange extends HttpServlet{
                 out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">PASSWORD CHANGE</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul>");
                 out.println("<p align=\"center\"><font size=\"6\"><b>THERE WAS A MISTAKE</b></font></p>");
                 out.println("<p align=\"center\"><font size=\"4\"><b>Wrong password. Try again</b></font></p>");
-                out.println("<input type=\"button\" class=\"boton grisn\" value=\"Go back\ href=\"PasswordChange.html\">");
+                out.println("<button class=\"boton grisn\" value=\"Go back\" onclick=\"PasswordChange.html\">");
                 out.println("</body>");
                 out.println("</html>");
             }
             
             
-            out.flush();
-            out.close();
             
             //out.println(resString);
            
@@ -122,7 +120,21 @@ public class PasswordChange extends HttpServlet{
         } catch(SQLException e) {
             e.printStackTrace();
             System.out.println("Resulset: " + sql_contra + " Exception: " + e);
+            System.out.println("Nooooooooooooooooooooooo");
+            out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Password Change</title>");
+                out.println("<link rel=StyleSheet type=text/css href=pattern.css>");
+                out.println("</head>");
+                out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
+                out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">PASSWORD CHANGE</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul>");
+                out.println("<p align=\"center\"><font size=\"6\"><b>THERE WAS A MISTAKE</b></font></p>");
+                out.println("<p align=\"center\"><font size=\"4\"><b>Wrong password. Try again</b></font></p>");
+                out.println("<a class=\"boton grisn\" href=\"http://localhost:8080/ErpTecnun_funciones/PasswordChange.html\">Go back</a>");
+                out.println("</body>");
+                out.println("</html>");
         }
+        out.flush();
         out.close();
     }
 }

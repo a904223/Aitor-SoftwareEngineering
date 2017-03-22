@@ -152,7 +152,6 @@ margin-right: 250px;
     }
 
     .dropdown-content a {
-        color: #33B809;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
@@ -187,9 +186,6 @@ margin-right: 250px;
 
     a:link {
     color: blue }
-
-    a:visited {
-    color: purple }
     
     img{
     height:100px;
@@ -197,9 +193,5 @@ margin-right: 250px;
     align: left;
 
     }
-    
-    
-    
-    
     
    
