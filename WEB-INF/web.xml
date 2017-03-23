@@ -63,6 +63,10 @@
         <servlet-name>PasswordChange</servlet-name>
         <servlet-class>PasswordChange</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowInfoEmployees</servlet-name>
+        <servlet-class>ShowInfoEmployees</servlet-class>
+    </servlet>
 
 <servlet-mapping>
   <servlet-name>Insertar</servlet-name>
@@ -131,5 +135,9 @@
     <servlet-mapping>
         <servlet-name>PasswordChange</servlet-name>
         <url-pattern>/PasswordChange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowInfoEmployees</servlet-name>
+        <url-pattern>/ShowInfoEmployees</url-pattern>
     </servlet-mapping>
 </web-app>

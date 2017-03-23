@@ -30,152 +30,110 @@ public class ShowInfoEmployees extends HttpServlet{
         
         out = response.getWriter();
         
-        String sql = "SELECT Nombre, Apellidos, Email, [Mobile Phone], [Date of Birth], [Job Title], Department, Salary, [Works with Commision], Commision(% on sales) FROM Employees";
+        String sql = "SELECT Nombre, Apellidos, Email, [Mobile Phone], [Date of Birth], [Job Title], Department, Salary, [Works with Commision], [Commision(% on sales)] FROM Employees";
+        String sql_count = "SELECT MAX(IDEmployee) AS Count FROM Employees" ;
         
         try {
             Statement statement=connection.createStatement();
+            Statement statement2=connection.createStatement();
             
             ResultSet result = statement.executeQuery(sql);
+            ResultSet result2 = statement2.executeQuery(sql_count);
             
-            int count=result2.getInt("Total");
-            //System.out.println(count);
+            result2.next();
+            int count=result2.getInt("Count");
+            System.out.println(count);
+            int columnas = 10;
             
-            String resString = "";
-            String resString2 = "";
-            String resString3Year="";
-            String resString3Month = "";
-            String resString3Day = "";
-            boolean first = true;
-            while(result.next() && result3.next()) {
-                if (!first) {
-                    resString += "\t";
-                    resString2 += "\t";
-                    resString3Year += "/";
-                    resString3Month += "/";
-                    resString3Day += "/";
-                } else {
-                    first = false;
-                }
-                resString += result.getString("Nombre");
-                resString2 += result.getString("Day Off");
-                //resString += " " + result.getString("surname") + "\"";
-                resString3Year += result3.getString("yr");
-                resString3Month += result3.getString("mnth");
-                resString3Day += result3.getString("dy");
+            String[][] resString = new String[count][columnas];
+            int a = 0;
+            
+            while(result.next()) {
+                
+                resString[a][0] = result.getString("Nombre");
+                resString[a][1] = result.getString("Apellidos");
+                resString[a][2] = result.getString("Email");
+                resString[a][3] = result.getString("Mobile Phone");
+                resString[a][4] = result.getString("Date of Birth");
+                resString[a][5] = result.getString("Job Title");
+                resString[a][6] = result.getString("Department");
+                resString[a][7] = result.getString("Salary");
+                resString[a][8] = result.getString("Works with Commision");
+                resString[a][9] = result.getString("Commision(% on sales)");
+                a ++ ;
+                
             }
             
-            String[] palabrasSeparadas = resString.split("\t");
-            String[] DayOff = resString2.split("\t");
-            //String[] SqlDate = resString3.split("/");
-            String[] SqlYear = resString3Year.split("/");
-            String[] SqlMonth = resString3Month.split("/");
-            String[] SqlDay = resString3Day.split("/");
             
-            int columnas=7;
-            
-            System.out.println("SqlDay[0]: " + SqlDay[0]);
-            System.out.println("SqlMonth[0]: " + SqlMonth[0]);
-            System.out.println("SqlYear[0]: " + SqlYear[0]);
-            System.out.println("Day Off[0]: " + DayOff[0]);
-                
-            System.out.println("Long year: " + SqlYear.length);
-            System.out.println("Long month: " + SqlMonth.length);
-            System.out.println("Long day: " + SqlDay.length);
+            // System.out.println("Long year: " + SqlYear.length);
+            // System.out.println("Long month: " + SqlMonth.length);
+            // System.out.println("Long day: " + SqlDay.length);
             
         
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Working timetable</title>");
-            out.println("<meta charset=\"utf-8\"> <link rel=\"StyleSheet\" type=\"text/css\" href=\"pattern.css\"><link rel=\"StyleSheet\" type=\"text/css\" href=\"tabla.css\"><link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css\"> <script src=\"//code.jquery.com/jquery-1.10.2.js\"></script> <script src=\"//code.jquery.com/ui/1.11.1/jquery-ui.js\"></script> <style> #draggable { width: 100px; background-color: rgba(173, 255, 47, 0.2); border-radius: 26px; border-width: 5px; height: 100px; padding: 0.5em; } #droppable td{ width: 100px; height: 100px; padding: 0.5em; } </style> <script src=\"https://code.jquery.com/jquery-1.12.4.js\"></script> <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script> <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script> <script src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.js\"></script> <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css\">");
-            out.println("<script> $( function() { $( \"#draggable\" ).draggable({ revert: \"valid\" }); $( \'#droppable td\' ).droppable({ drop: function ( event, ui ) { var parenttd = $(this).attr(\'id\'); alert(\"parenttd=\" + parenttd); $( this ) .find( \"p\" ) .html( \"Day Off!\" ); } }) }); </script>");
+            out.println("<title>ShowInfoEmployees timetable</title>");
+            out.println("<meta charset=\"utf-8\"> <link rel=\"StyleSheet\" type=\"text/css\" href=\"pattern.css\"><link rel=\"StyleSheet\" type=\"text/css\" href=\"tabla.css\">");
             out.println("</head>");
             out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
-            out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"orders.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><div id=\"draggable\" class=\"ui-widget-content\"> <p>Day Off</p> </div> <br /><br />");
-            out.println("<p align=\"center\"><font size=\"6\"><b>WORKING TIMETABLE</b></font></p>");
-            out.println("<input type=\"hidden\" name=\"day\" value=\"" + Day + "\">");
-            out.println("<input type=\"hidden\" name=\"month\" value=\"" + Month + "\">");
-            out.println("<input type=\"hidden\" name=\"year\" value=\"" + Year + "\">");
+            out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><br /><br />");
+            out.println("<p align=\"center\"><font size=\"6\"><b>Employees </b></font></p>");
+            // out.println("<input type=\"hidden\" name=\"day\" value=\"" + Day + "\">");
+            // out.println("<input type=\"hidden\" name=\"month\" value=\"" + Month + "\">");
+            // out.println("<input type=\"hidden\" name=\"year\" value=\"" + Year + "\">");
             out.println("<p align=\"center\">");
-            out.println("<TABLE id=\"droppable\" border=\"1\" class=\"tabla\" cellspacing=\"0\">");
+            out.println("<TABLE border=\"1\" class=\"tabla\" >");
             
-            int[] dias=new int[8];
+            
             for (int i=0; i< (count+1); i++) {
                 out.println("<TR>");
                 for (int j=0; j< (columnas+1); j++) {
                     if (i==0) {
                         switch (j) {
-
-                            case 0: out.println ("<TD>&nbsp</TD>");
+                            
+                            case 0: out.println ("<TH><h1>Nombre</h1></TH>");
                                     break;
-                            case 1: out.println ("<TH><h1>Monday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 1: out.println ("<TH><h1>Apellido</h1></TH>");
                                     break;
-                            case 2: out.println ("<TH><h1>Tuesday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 2: out.println ("<TH><h1>Email</h1></TH>");
                                     break;
-                            case 3: out.println ("<TH><h1>Wednesday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 3: out.println ("<TH><h1>Mobile Phone</h1></TH>");
                                     break;
-                            case 4: out.println ("<TH><h1>Thursday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 4: out.println ("<TH><h1>Date of Birth</h1></TH>");
                                     break;
-                            case 5: out.println ("<TH><h1>Friday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 5: out.println ("<TH><h1>Job Title</h1></TH>");
                                     break;
-                            case 6: out.println ("<TH><h1>Saturday, " + (negativo*(l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 6: out.println ("<TH><h1>Department</h1></TH>");
                                     break;
-                            case 7: out.println ("<TH><h1>Sunday, " + negativo*((l+(j-1))+7*(semana-2)) + "</h1></TH>");
-                                    dias[j]=negativo*((l+(j-1))+7*(semana-2));
-                                    if (j>=(h-2)) {negativo=1;}
-                                    System.out.println("I: " + i + " j: " + j + " dias: " + dias[j] );
+                            case 7: out.println ("<TH><h1>Salary</h1></TH>");
                                     break;
-
+                            case 8: out.println ("<TH><h1>Works with Commision</h1></TH>");
+                                    break;
+                            case 9: out.println ("<TH><h1>Commision( % on sales )</h1></TH>");
+                                    break;
                         }
                     }
                     if (i!=0) { 
                         switch (j) {
-                                    case 0: out.println ("<TH>" + palabrasSeparadas[i-1] + "</TH>");
+                                    case 0: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 1: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".1\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".1\"><p>&nbsp</p></TD>");}
+                                    case 1: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 2: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".2\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".2\"><p>&nbsp</p></TD>");}
+                                    case 2:out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 3: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".3\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".3\"><p>&nbsp</p></TD>");}
+                                    case 3: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 4: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".4\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".4\"><p>&nbsp</p></TD>");}
+                                    case 4: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 5: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".5\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".5\"><p>&nbsp</p></TD>");}
+                                    case 5: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 6: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".6\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".6\"><p>&nbsp</p></TD>");}
+                                    case 6: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 7: if (dias[j]==Integer.parseInt(SqlDay[i-1]) && Month==Integer.parseInt(SqlMonth[i-1]) && Year==Integer.parseInt(SqlYear[i-1]) && Integer.parseInt(DayOff[i-1])==1) {
-                                                out.println ("<TD id=\"" + i + ".7\"><p>Day Off</p></TD>");
-                                            }else { out.println ("<TD id=\"" + i + ".7\"><p>&nbsp</p></TD>");}
+                                    case 7: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                            break;
+                                    case 8: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                            break;
+                                    case 9: out.println ("<TD>" + resString[i-1][j] + "</TD>");
                                             break;
                         }
                     }
