@@ -73,16 +73,18 @@ public class ShowInfoEmployees extends HttpServlet{
             out.println("<html>");
             out.println("<head>");
             out.println("<title>ShowInfoEmployees timetable</title>");
+            out.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>");
+            out.println("<script type=\"text/javascript\" src=\"ShowInfoEmployees.js\"></script>");
             out.println("<meta charset=\"utf-8\"> <link rel=\"StyleSheet\" type=\"text/css\" href=\"pattern.css\"><link rel=\"StyleSheet\" type=\"text/css\" href=\"tabla.css\">");
             out.println("</head>");
             out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
             out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><br /><br />");
-            out.println("<p align=\"center\"><font size=\"6\"><b>Employees </b></font></p>");
+            out.println("<button id=\"modificar\" onclick=\"edit_row()\" class=\"boton grisn\">Modify</button><button id=\"guardar\" onclick=\"save_row()\" style=\"display: none;\" class=\"boton grisn\">Save</button><p align=\"center\"><font size=\"6\"><b>Employees </b></font></p>");
             // out.println("<input type=\"hidden\" name=\"day\" value=\"" + Day + "\">");
             // out.println("<input type=\"hidden\" name=\"month\" value=\"" + Month + "\">");
             // out.println("<input type=\"hidden\" name=\"year\" value=\"" + Year + "\">");
             out.println("<p align=\"center\">");
-            out.println("<TABLE border=\"1\" class=\"tabla\" >");
+            out.println("<TABLE id=\"data_table\" border=\"1\" class=\"tabla\" >");
             
             
             for (int i=0; i< (count+1); i++) {
@@ -115,25 +117,34 @@ public class ShowInfoEmployees extends HttpServlet{
                     }
                     if (i!=0) { 
                         switch (j) {
-                                    case 0: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 0: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 1: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 1: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 2:out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 2: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 3: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 3: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 4: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 4: String[] fecha = (resString[i-1][j]).split(" ");
+                                            out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + fecha[0] + "</TD>");
                                             break;
-                                    case 5: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 5: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 6: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 6: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 7: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 7: out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
                                             break;
-                                    case 8: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 8: if (Integer.parseInt(resString[i-1][j]) == 1) {
+                                                out.println ("<TD id=\"" + i + "_" + (j+1) + "\">Yes</TD>");
+                                            } else {
+                                                out.println ("<TD id=\"" + i + "_" + (j+1) + "\">No</TD>");
+                                            }
                                             break;
-                                    case 9: out.println ("<TD>" + resString[i-1][j] + "</TD>");
+                                    case 9: if (resString[i-1][j] == null) {
+                                                out.println ("<TD id=\"" + i + "_" + (j+1) + "\">&nbsp</TD>");
+                                            } else {
+                                                out.println ("<TD id=\"" + i + "_" + (j+1) + "\">" + resString[i-1][j] + "</TD>");
+                                            }
                                             break;
                         }
                     }
