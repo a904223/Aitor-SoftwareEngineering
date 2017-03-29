@@ -33,7 +33,7 @@ public class Save extends HttpServlet {
 		
         String strcont = req.getParameter("cont");
         int cont = Integer.parseInt(strcont);
-        String[] name;
+        String[] name = new String[cont];
         String sql="";
         
         for (int i=1; i<(cont + 1); i++){
