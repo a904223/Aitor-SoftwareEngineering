@@ -67,6 +67,10 @@
         <servlet-name>ShowInfoEmployees</servlet-name>
         <servlet-class>ShowInfoEmployees</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Save</servlet-name>
+        <servlet-class>Save</servlet-class>
+    </servlet>
 
 <servlet-mapping>
   <servlet-name>Insertar</servlet-name>
@@ -139,5 +143,9 @@
     <servlet-mapping>
         <servlet-name>ShowInfoEmployees</servlet-name>
         <url-pattern>/ShowInfoEmployees</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>Save</servlet-name>
+        <url-pattern>/Save</url-pattern>
     </servlet-mapping>
 </web-app>

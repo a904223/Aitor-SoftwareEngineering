@@ -79,7 +79,7 @@ public class ShowInfoEmployees extends HttpServlet{
             out.println("</head>");
             out.println("<body bgcolor=\"#FFFFFF\" text=\"#631818\">");
             out.println("<div class=\"header\"><img align=\"left\" src=\"Logo ERP Tecnun.png\"><h1 align=\"center\">ACCOUNTING - Staff</h1></div><ul class=\"navbar\"><li class=\"dropdown\"><a class=\"dropbtn\"><font face=\"Arial\">Menu</font></a><div class=\"dropdown-content\"><a class=\"active\" href=\"Pedido.html\">Orders</a><a href=\"customers.html\">Customers</a><a href=\"producttxt.html\">Products</a><a href=\"accounting.html\">Accounting</a><a href=\"bills.html\">Bills</a></div></li></ul><br /><br />");
-            out.println("<button id=\"modificar\" onclick=\"edit_row()\" class=\"boton grisn\">Modify</button><button id=\"guardar\" onclick=\"save_row()\" style=\"display: none;\" class=\"boton grisn\">Save</button><p align=\"center\"><font size=\"6\"><b>Employees </b></font></p>");
+            out.println("<button id=\"modificar\" onclick=\"edit_row()\" class=\"boton grisn\">Modify</button><button id=\"guardar\" onclick=\"save_row()\" style=\"display: none;\" class=\"boton grisn\">Save</button><div id=\"mensaje\"></div><p align=\"center\"><font size=\"6\"><b>Employees </b></font></p>");
             // out.println("<input type=\"hidden\" name=\"day\" value=\"" + Day + "\">");
             // out.println("<input type=\"hidden\" name=\"month\" value=\"" + Month + "\">");
             // out.println("<input type=\"hidden\" name=\"year\" value=\"" + Year + "\">");

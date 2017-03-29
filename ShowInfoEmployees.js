@@ -2,6 +2,7 @@
     function edit_row() {
         var filas = document.getElementById("data_table").rows.length;
         var i;
+        document.innerHTML="<input type=\"hidden\" name=\"cont\" value=\"" + filas + "\"></input>";
 
         
         for (i=1; i < (filas); i++){
@@ -32,16 +33,16 @@
             var commision_data=commision.innerHTML;
             
 
-            name.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-1\" value=\"" + name_data + "\"></input>";
-            surname.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-2\" value=\"" + surname_data + "\"></input>";
-            email.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-3\" value=\"" + email_data + "\"></input>";
-            mobile_phone.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-4\" value=\"" + mobile_phone_data + "\"></input>";
-            date_of_birth.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-5\" value=\"" + date_of_birth_data + "\"></input>";
-            job_title.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-6\" value=\"" + job_title_data + "\"></input>";
-            department.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-7\" value=\"" + department_data + "\"></input>";
-            salary.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-8\" value=\"" + salary_data + "\"></input>";
-            works_with_commision.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-9\" value=\"" + works_with_commision_data + "\"></input>";
-            commision.innerHTML="<input type='text' size=\"10\" id=\"" + i + "-10\" value=\"" + commision_data + "\"></input>";
+            name.innerHTML="<input type='text' name='name" + i + "' size=\"10\" id=\"" + i + "-1\" value=\"" + name_data + "\"></input>";
+            surname.innerHTML="<input type='text' name=\"surname\" size=\"10\" id=\"" + i + "-2\" value=\"" + surname_data + "\"></input>";
+            email.innerHTML="<input type='text' name=\"email\" size=\"10\" id=\"" + i + "-3\" value=\"" + email_data + "\"></input>";
+            mobile_phone.innerHTML="<input type='text' name=\"mobile_phone\" size=\"10\" id=\"" + i + "-4\" value=\"" + mobile_phone_data + "\"></input>";
+            date_of_birth.innerHTML="<input type='text' name=\"date_of_birth\" size=\"10\" id=\"" + i + "-5\" value=\"" + date_of_birth_data + "\"></input>";
+            job_title.innerHTML="<input type='text' name=\"job_title\" size=\"10\" id=\"" + i + "-6\" value=\"" + job_title_data + "\"></input>";
+            department.innerHTML="<input type='text' name=\"department\" size=\"10\" id=\"" + i + "-7\" value=\"" + department_data + "\"></input>";
+            salary.innerHTML="<input type='text' name=\"salary\" size=\"10\" id=\"" + i + "-8\" value=\"" + salary_data + "\"></input>";
+            works_with_commision.innerHTML="<input type='text' name=\"works_with_commision\" size=\"10\" id=\"" + i + "-9\" value=\"" + works_with_commision_data + "\"></input>";
+            commision.innerHTML="<input type='text' name=\"commision\" size=\"10\" id=\"" + i + "-10\" value=\"" + commision_data + "\"></input>";
             
         }
 
@@ -79,6 +80,23 @@
             document.getElementById("modificar").style.display="block";
             document.getElementById("guardar").style.display="none";
         }
+        
+        var xmlhttp = new XMLHttpRequest ();
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                alert("Ha entrado");
+            }
+        }
+        xmlhttp.open('GET','Save',true);
+        xmlhttp.send();
+        
+        $(document).ready(function(){
+            $("#mensaje").text("The data has been modified correctly");
+            function hideMsg(){
+                $("#mensaje").fadeOut();
+            }
+        setTimeout(hideMsg,4000);
+        });
     }
 
     // function delete_row(no) {
