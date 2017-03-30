@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+    
     <servlet>
         <servlet-name>MostrarCustomer</servlet-name>
         <servlet-class>MostrarCustomer</servlet-class>
@@ -71,6 +73,11 @@
         <servlet-name>Save</servlet-name>
         <servlet-class>Save</servlet-class>
     </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Save</servlet-name>
+        <url-pattern>/Save</url-pattern>
+    </servlet-mapping>
 
 <servlet-mapping>
   <servlet-name>Insertar</servlet-name>
@@ -144,8 +151,5 @@
         <servlet-name>ShowInfoEmployees</servlet-name>
         <url-pattern>/ShowInfoEmployees</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>Save</servlet-name>
-        <url-pattern>/Save</url-pattern>
-    </servlet-mapping>
+     
 </web-app>

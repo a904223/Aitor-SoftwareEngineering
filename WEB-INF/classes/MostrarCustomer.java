@@ -34,10 +34,10 @@ public class MostrarCustomer extends HttpServlet {
             System.out.println("1");
             connection=DriverManager.getConnection(url); 
             System.out.println("2");
-            FileWriter fileWriter = new FileWriter("E:\\apache-tomcat-5.5.12\\webapps\\ErpTecnun\\log.txt", true);
-            PrintWriter toFile = new PrintWriter(fileWriter);
-            toFile.println(" ok:");
-            fileWriter.close();
+            // FileWriter fileWriter = new FileWriter("E:\\apache-tomcat-5.5.12\\webapps\\ErpTecnun\\log.txt", true);
+            // PrintWriter toFile = new PrintWriter(fileWriter);
+            // toFile.println(" ok:");
+            // fileWriter.close();
             Statement statement = connection.createStatement();
             System.out.println("3");
           

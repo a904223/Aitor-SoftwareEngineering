@@ -2,7 +2,8 @@
     function edit_row() {
         var filas = document.getElementById("data_table").rows.length;
         var i;
-        document.innerHTML="<input type=\"hidden\" name=\"cont\" value=\"" + filas + "\"></input>";
+        var contador = document.getElementById("contador");
+        contador.innerHTML="<input type=\"hidden\" name=\"cont\" value=\"" + filas + "\"></input>";
 
         
         for (i=1; i < (filas); i++){
@@ -52,6 +53,8 @@
     function save_row() {
         var filas = document.getElementById("data_table").rows.length;
         var j;
+        var name_array = [];
+        var surname_array = [];
         
         for (j=1; j < (filas); j++){
             var name_val=document.getElementById( j + '-1').value;
@@ -76,27 +79,33 @@
             document.getElementById(j + "_9").innerHTML=works_with_commision_val;
             document.getElementById(j + "_10").innerHTML=commision_val;
             
+            name_array[j] = document.getElementById(j + "_1").innerHTML;
+            surname_array[j] = document.getElementById(j + "_2").innerHTML;
+            
 
             document.getElementById("modificar").style.display="block";
             document.getElementById("guardar").style.display="none";
         }
+
+        var stringify1 = JSON.stringify(name_array);
+        var stringify2 = JSON.stringify(surname_array);
+            $.ajax({
+                type: "post",
+                url: "Save",
+                data: {name: stringify1, surname: stringify2, filas: filas},
+                success: function(){
+                    alert("Success, con j= " + j);
+                }
+            });
         
-        var xmlhttp = new XMLHttpRequest ();
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                alert("Ha entrado");
-            }
-        }
-        xmlhttp.open('GET','Save',true);
-        xmlhttp.send();
         
-        $(document).ready(function(){
-            $("#mensaje").text("The data has been modified correctly");
-            function hideMsg(){
-                $("#mensaje").fadeOut();
-            }
-        setTimeout(hideMsg,4000);
-        });
+                
+                $("#mensaje").text("The data has been modified correctly");
+                function hideMsg(){
+                    $("#mensaje").fadeOut();
+                }
+                setTimeout(hideMsg,4000);
+        
     }
 
     // function delete_row(no) {
